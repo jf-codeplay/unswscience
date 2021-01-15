@@ -6,8 +6,14 @@
 
 # useful for handling different item types with a single interface
 from itemadapter import ItemAdapter
+from extract_experience.process_html import execute
 
 
-class UnswsciencePipeline:
+class ExperiencePipeline:
     def process_item(self, item, spider):
+        adapter = ItemAdapter(item)
+        if adapter.get('experience'):
+            adapter['experience'] = execute(adapter['experience'], adapter['name'])
+        else:
+            adapter['experience'] = None
         return item

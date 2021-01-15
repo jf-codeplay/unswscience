@@ -38,9 +38,11 @@ class StafftmpdataSpider(scrapy.Spider):
         #     item["experience"] = [resource.xpath("./li/text()").extract_first() for resource in response.xpath(style_1)]
         full_xpath_bio = "//h2[text()='Biography']/following-sibling::div[@class = 'body-full']/div[@class = 'field-bio']"
         if response.xpath(full_xpath_bio):
-            item["biography"] = response.xpath(full_xpath_bio).extract_first()
+            biography = response.xpath(full_xpath_bio).extract_first() or ''
         else:
-            item["biography"] = response.xpath("//h2[text()='Biography']/following-sibling::div[@class = 'field-bio']").extract_first()
+            biography = response.xpath("//h2[text()='Biography']/following-sibling::div[@class = 'field-bio']").extract_first() or ''
         xpath_quali = "//h2[text()='My Qualifications']/following-sibling::div[@class = 'field-my-qualifications']"
-        item["qualification"] = response.xpath(xpath_quali).extract_first()
+        qualification = response.xpath(xpath_quali).extract_first() or ''
+        if biography or qualification:
+            item["experience"] = "<br>".join([biography, qualification])
         yield item

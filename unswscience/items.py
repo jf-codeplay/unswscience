@@ -10,6 +10,5 @@ class UnswscienceItem(scrapy.Item):
     # define the fields for your item here like:
     name = scrapy.Field()
     link = scrapy.Field()
-    biography = scrapy.Field()
-    qualification = scrapy.Field()
+    experience = scrapy.Field()
     pass

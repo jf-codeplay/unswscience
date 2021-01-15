@@ -1,6 +1,6 @@
 from nltk.tag import StanfordNERTagger
 import os
-import analysis.config as config
+from extract_experience import config as config
 
 
 def tagger(sentence):
