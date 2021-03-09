@@ -45,4 +45,6 @@ class StafftmpdataSpider(scrapy.Spider):
         qualification = response.xpath(xpath_quali).extract_first() or ''
         if biography or qualification:
             item["experience"] = "<br>".join([biography, qualification])
+        xpath_image = "//div[@class = 'profile-indent']/div[@class = 'image']/picture/source[1]/@srcset"
+        item["image"] = response.urljoin(response.xpath(xpath_image).extract_first())
         yield item

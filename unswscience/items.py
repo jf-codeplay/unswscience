@@ -11,4 +11,5 @@ class UnswscienceItem(scrapy.Item):
     name = scrapy.Field()
     link = scrapy.Field()
     experience = scrapy.Field()
+    image = scrapy.Field()
     pass

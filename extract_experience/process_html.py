@@ -43,7 +43,7 @@ class ExtractExperience:
                 else:
                     new_matched.append(title)
             matched_title += new_matched
-        additional_expression_of_degree = ["B. S.", "B.S.", "M.S.", "M. S."]  # Expressions of degrees current regex can't handle
+        additional_expression_of_degree = ["B. S.", "B.S.", "M.S.", "M. S.", "Doctor of Philosophy"]  # Expressions of degrees current regex can't handle
         medical_degree = ["Bachelor of Medicine, Bachelor of Surgery", "MBBS", "MB BS", "BMBS", "MBChB", "MBBCh",
                   "Bachelor of Pharmacy", "B Pharm", "PharmB",
                   "Master of Pharmacy", "MPharm",
@@ -163,8 +163,9 @@ def execute(html_text, name):
                         if response.status_code == 200:
                             country = [uni["country"] for uni in response.json()]
                             if len(list(set(country))) == 1:
-                                experience["country"] += country
+                                experience["country"] += list(set(country))
                 experience["country"] = list(set(experience["country"]))
+                # experience["country"] = list(set(experience["country"]))
                 experience_list.append(experience.copy())
                 experience.clear()
                 # print("Name: {}\nMatch string:{}\n Title: {}\n Uni: {}\n Year:{}\n Country:{}\n"
